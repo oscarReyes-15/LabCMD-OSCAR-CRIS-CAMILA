@@ -6,11 +6,11 @@ package cmdapp1;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
+
 
 
 public class input {
-    private final String[] cmds = {"dir", "del", "crear", "cd", "info", "wr", "Time", "Date", "..." , "salir"};
+    private final String[] cmds = {"dir", "rm", "crear", "cd", "info", "wr", "rd", "Time", "Date", "..." , "Mkdirs", "Mkfile", "salir"};
     private GUI G;
     private fileManagement files;
     private String direccion, texto;
@@ -80,7 +80,9 @@ public class input {
                 }
                 case "wr" -> {
                     texto = "texto";
-                    G.escribirTXT();
+                    while (texto == null){
+                        G.escribirTXT();
+                    }
                
                     if (files.escribir(texto)) {
                         return ("Texto escrito correctamente.");
@@ -93,8 +95,10 @@ public class input {
                     return "Regresado con exito";
                 }
                 case "Date" ->{
+                    return files.fecha_actual();
                 }
                 case "Time" -> {
+                    return files.hora_actual();
                 }
                 case "cd" -> {
                     System.out.println(cmd + " " + direccion);
@@ -107,6 +111,15 @@ public class input {
                 }
                 case "salir" -> {
                     System.exit(0);
+                }
+                case "Mkdirs" -> {
+                    return (files.crearFolder() == true? "\nCreacion exitosa":"\nNo se pudo crear");
+                }
+                case "Mkfile" -> {
+                    return (files.crearFile() == true? "\nCreacion exitosa":"\nNo se pudo crear");
+                }
+                case "rd" -> {
+                    return files.leer();
                 }
                 default -> {
                     return "cmd no se ejecuto correctamente\n";
