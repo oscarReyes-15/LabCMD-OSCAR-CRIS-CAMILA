@@ -21,7 +21,7 @@ public class input {
     }
     
     // chequee si el comando esta escrito correctamente
-    String checkInput (String input) {
+    String checkInput (String input) throws IOException {
         String[] userCMD = null;
         userCMD = input.split("[\\s]");
         String comando = userCMD[0];
@@ -53,7 +53,7 @@ public class input {
         return false;
     }
     
-    String executeCMD (String cmd) {
+    String executeCMD (String cmd) throws IOException {
         try{
             switch (cmd) {
                 case "dir" -> {
@@ -61,10 +61,22 @@ public class input {
 
                 }
                 case "del" -> {
-
+                    System.out.println(cmd + " " + direccion);
+                    if (files.CheckTipo()) {
+                        return "Se ha borrado correctamente";                    
+                    }
+                    else{
+                        return "No se borro nada";
+                    }
                 }
+                
                 case "crear" -> {
-                    
+                    if(files.crearFile()){
+                        return "Se creo el archivo";
+                    }
+                    else{
+                        return "No se creo nada";
+                    }
                 }
                 case "cd" -> {
                     System.out.println(cmd + " " + direccion);
@@ -80,8 +92,7 @@ public class input {
                 }
 
             }
-        } 
-        catch (NullPointerException e) {}
+        }catch (NullPointerException e) {}
             
         return "algo salio mal";
     }

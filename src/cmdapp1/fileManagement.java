@@ -88,9 +88,31 @@ public class fileManagement {
         }
         return false;
     }
+<<<<<<< HEAD
 
     private void borrarCarpeta(File file) {
 
+=======
+    
+   boolean CheckTipo(){
+       if (myFile.isDirectory()) {
+           System.out.println("Se borro correctamente");
+           return borrarCarpeta();
+       }
+       else if(myFile.isFile()){
+           System.out.println("Se borro correctamente");
+           return borrarCarpeta();
+           
+       }
+       else{
+           System.out.println("No se borro nada");
+       }
+       return false;
+   }
+    
+    private void borrarCarpeta (File file) {
+        
+>>>>>>> 70dba50ad750b8d144b132e57c5255d379b42a79
         for (File f : file.listFiles()) {
             if (f.isDirectory() == true) {
                 if (f.listFiles() != null) {
