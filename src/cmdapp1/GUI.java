@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import javax.swing.*;
 
 
@@ -75,6 +76,25 @@ public final class GUI extends JFrame{
         "(c) Microsoft Corporation. Todos los derechos reservados. \n");
     }
     
+    void escribirTXT () {
+        texto.append("Ingrese el texto: ");
+
+        
+        cmd.addKeyListener(new KeyAdapter () {
+            @Override
+            public void keyPressed(KeyEvent e){
+              
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                        key.setText(cmd.getText()); 
+                        e.consume();
+                        cmd.setText("");
+                        configurarTxtPn ();
+                    }
+                
+            } 
+        });
+    }
+    
     void configurarTxtPn () {
         cmd.setForeground(Color.WHITE);
         cmd.setBackground(Color.DARK_GRAY);
@@ -82,12 +102,18 @@ public final class GUI extends JFrame{
         cmd.addKeyListener(new KeyAdapter () {
             @Override
             public void keyPressed(KeyEvent e){
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    texto.append(key.checkInput(cmd.getText())); 
-                    e.consume();
-                    cmd.setText("");
+                try{
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                        texto.append(key.checkInput(cmd.getText())); 
+                        e.consume();
+                        cmd.setText("");
+                    }
+                }catch (IOException f){
+                    texto.append("\n"
+                            + "\n"
+                            + "IOException - Error");
                 }
             } 
-        });
+        });;
     }
 }
