@@ -79,7 +79,7 @@ public class input {
                     }
                 }
                 case "wr" -> {
-                    texto = null;
+                    texto = "texto";
                     G.escribirTXT();
                
                     if (files.escribir(texto)) {

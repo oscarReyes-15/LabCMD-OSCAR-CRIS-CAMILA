@@ -125,31 +125,34 @@ public class fileManagement {
     String dir() {
         if (myFile.isDirectory()) {
 
-            System.out.println("Folder: " + myFile.getName());
+            String output = "";
+            output += "Folder: " + myFile.getName();
             int dirs = 0, files = 0, bytes = 0;
 
             for (File child : myFile.listFiles()) {
                 System.out.println(new Date(child.lastModified()));
                 if (child.isDirectory()) {
-                    System.out.print("\t<DIR>\t");
+                    output += "\n \t<DIR>\t";
                     dirs++;
                 }
                 if (child.isFile()) {
-                    System.out.print("\t<FILE>\t");
-                    System.out.println(child.length());
+                    output += "\n \t<FILE>\t";
+                    output += "\n" + child.length();
                     files++;
                     bytes += child.length();
                 }
-                System.out.print("\t" + child.getName());
+                output += "\t" + child.getName();
             }
 
-            System.out.println("\n(" + files + ")" + " files y (" + dirs + ") dirs");
-            System.out.println("bytes: " + bytes);
+            output += "\n(" + files + ")" + " files y (" + dirs + ") dirs";
+            output += "bytes: " + bytes;
+            
+            return output;
 
         } else {
             return "Accion no permitida";
         }
-        return null;
+        
     }
     
     public String fecha_actual() {
