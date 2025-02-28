@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -48,6 +49,7 @@ import java.util.Date;
 public class fileManagement {
 
     private File myFile = null;
+    private Calendar fecha = Calendar.getInstance();
 
     void setFile(String direccion) {
         myFile = new File(direccion);
@@ -92,6 +94,25 @@ public class fileManagement {
         }
         return false;
     }
+<<<<<<< HEAD
+
+    boolean CheckTipo() {
+        if (myFile.isDirectory()) {
+            System.out.println("Se borro correctamente");
+            return borrarCarpeta();
+        } else if (myFile.isFile()) {
+            System.out.println("Se borro correctamente");
+            return borrarCarpeta();
+
+        } else {
+            System.out.println("No se borro nada");
+        }
+        return false;
+    }
+
+    private void borrarCarpeta(File file) {
+
+=======
    boolean CheckTipo(){
        if (myFile.isDirectory()) {
            System.out.println("Se borro correctamente");
@@ -109,6 +130,7 @@ public class fileManagement {
    }
     
     private void borrarCarpeta (File file) {
+>>>>>>> 2a1d9e48081305c0914c8d0499457a9e365f3b27
         for (File f : file.listFiles()) {
             if (f.isDirectory() == true) {
                 if (f.listFiles() != null) {
@@ -152,6 +174,23 @@ public class fileManagement {
             return "Accion no permitida";
         }
         
+    }
+    
+    public String fecha_actual() {
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int mes = fecha.get(Calendar.MONTH);
+        int año = fecha.get(Calendar.YEAR);
+        
+        return " Fecha actual: " + dia + "/" + mes + "/" + año;
+    }
+    
+    public String hora_actual() {
+        int hora = fecha.get(Calendar.HOUR);
+        int min = fecha.get(Calendar.MINUTE);
+        int sec = fecha.get(Calendar.SECOND);
+        int ampm = fecha.get(Calendar.AM_PM);
+        
+        return " Hora actual: " + hora + ":" + min + ":" + sec + " " + ampm;
     }
 
     public boolean escribir(String texto) throws IOException {
