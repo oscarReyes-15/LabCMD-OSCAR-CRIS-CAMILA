@@ -54,6 +54,10 @@ public class fileManagement {
     void setFile(String direccion) {
         myFile = new File(direccion);
     }
+    
+    File getFile(){
+        return myFile;
+    }
 
     String info() {
 
@@ -90,6 +94,7 @@ public class fileManagement {
         }
         return false;
     }
+<<<<<<< HEAD
 
     boolean CheckTipo() {
         if (myFile.isDirectory()) {
@@ -107,6 +112,25 @@ public class fileManagement {
 
     private void borrarCarpeta(File file) {
 
+=======
+   boolean CheckTipo(){
+       if (myFile.isDirectory()) {
+           System.out.println("Se borro correctamente");
+           return borrarCarpeta();
+       }
+       else if(myFile.isFile()){
+           System.out.println("Se borro correctamente");
+           return borrarCarpeta();
+           
+       }
+       else{
+           System.out.println("No se borro nada");
+       }
+       return false;
+   }
+    
+    private void borrarCarpeta (File file) {
+>>>>>>> 2a1d9e48081305c0914c8d0499457a9e365f3b27
         for (File f : file.listFiles()) {
             if (f.isDirectory() == true) {
                 if (f.listFiles() != null) {

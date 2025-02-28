@@ -10,10 +10,10 @@ import java.util.Scanner;
 
 
 public class input {
-    private final String[] cmds = {"dir", "del", "crear", "cd", "info"};
+    private final String[] cmds = {"dir", "del", "crear", "cd", "info", "wr", "Time", "Date", "..." , "salir"};
     private GUI G;
     private fileManagement files;
-    private String direccion;
+    private String direccion, texto;
     
     public input (GUI G){
         this.G = G;
@@ -34,13 +34,10 @@ public class input {
         System.out.println("1. " + Arrays.toString(userCMD));
         boolean valido = checkCMD(comando);
         if (valido == true){
-            return executeCMD(comando);
-            
+            return executeCMD(comando);     
         } else {
             return "\nno se registro como cmd, escribalo correctamente";
-        }
-        
-        
+        } 
     }
     
     boolean checkCMD (String input) {
@@ -53,12 +50,15 @@ public class input {
         return false;
     }
     
+    void setText(String texto) {
+        this.texto = texto;
+    }
+    
     String executeCMD (String cmd) throws IOException {
         try{
             switch (cmd) {
                 case "dir" -> {
-                    
-
+                   return files.dir();
                 }
                 case "del" -> {
                     System.out.println(cmd + " " + direccion);
@@ -78,6 +78,24 @@ public class input {
                         return "No se creo nada";
                     }
                 }
+                case "wr" -> {
+                    texto = null;
+                    G.escribirTXT();
+               
+                    if (files.escribir(texto)) {
+                        return ("Texto escrito correctamente.");
+                    } else {
+                        return ("No se pudo escribir el texto.");
+                    }
+                }
+                case "..." ->{
+                    files.setFile(files.getFile().getAbsoluteFile().getParent());
+                    return "Regresado con exito";
+                }
+                case "Date" ->{
+                }
+                case "Time" -> {
+                }
                 case "cd" -> {
                     System.out.println(cmd + " " + direccion);
                     files.setFile(direccion);
@@ -87,14 +105,20 @@ public class input {
                     System.out.println(cmd + " " + direccion);
                     return direccion + "\n" + files.info() + "\n";
                 }
+                case "salir" -> {
+                    System.exit(0);
+                }
                 default -> {
                     return "cmd no se ejecuto correctamente\n";
                 }
 
             }
-        }catch (NullPointerException e) {}
+        }catch (NullPointerException e) {
+            return "\nFile esta null";
+        
+        }
             
-        return "algo salio mal";
+        return "\nalgo salio mal";
     }
     
 }
