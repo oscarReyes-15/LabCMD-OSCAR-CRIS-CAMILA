@@ -4,8 +4,11 @@
  */
 package cmdapp1;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
@@ -101,7 +104,7 @@ public class fileManagement {
             return borrarCarpeta();
         } else if (myFile.isFile()) {
             System.out.println("Se borro correctamente");
-            return borrarCarpeta();
+            return borrar();
 
         } else {
             System.out.println("No se borro nada");
@@ -187,4 +190,28 @@ public class fileManagement {
             return false;
         }
     }
-}
+    
+    public String leer() throws FileNotFoundException {
+        if (myFile.isFile()){
+            try {
+                FileReader lector = new FileReader(myFile);
+                BufferedReader buffer = new BufferedReader(lector);
+                String linea;
+                
+                while ((linea = buffer.readLine()) != null){
+                    return linea;
+                }
+                
+                buffer.close();
+                lector.close();
+            }catch (IOException f) {
+                return "Ocurrio un error " + f.getMessage();
+            }
+            
+            } else if(myFile.isDirectory()){
+                return "Esta direccion no es un archivo legible";
+            }
+            return "Ocurrio un error al leer esto";
+        }
+    }
+
