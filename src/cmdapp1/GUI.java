@@ -62,7 +62,7 @@ public final class GUI extends JFrame{
     
     void configurarTexto () {
         // astetico
-        texto.setForeground(Color.GREEN);
+        texto.setForeground(Color.WHITE);
         texto.setBackground(Color.BLACK);
         texto.setSize(getWidth() - 20, getHeight() - 20);
         texto.setAlignmentX(LEFT_ALIGNMENT);
@@ -76,7 +76,7 @@ public final class GUI extends JFrame{
     }
     
     void configurarTxtPn () {
-        cmd.setForeground(Color.GREEN);
+        cmd.setForeground(Color.WHITE);
         cmd.setBackground(Color.DARK_GRAY);
         
         cmd.addKeyListener(new KeyAdapter () {
